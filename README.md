@@ -2,7 +2,8 @@
 
 ###Objectives
 
-  * Understand how to use approximations when calculating Big O
+  * Understand what we mean by big o
+  * Understand how to use approximations when considering big o
   * Binary Search
 
 ### Supersize it
