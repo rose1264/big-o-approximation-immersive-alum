@@ -1,6 +1,6 @@
 ## Big O and Binary Search
 
-###Objectives
+### Objectives
 
   * Understand what we mean by big o
   * Understand how to use approximations when considering big o
