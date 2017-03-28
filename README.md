@@ -58,13 +58,13 @@ Now, if I gave you the choice between answering two questions: if the letter "u"
 
 Probably the second right?  In answering the question, you would no longer visit each letter of the string one by one, but instead would look to the middle, see that the middle letter is "i", move further down past the t section, and at w we know that it is not there.  I call our procedure the phone book method.
 
-![](https://media3.giphy.com/media/zylAO7Y8dhEvm/200_s.gif)
+![](https://s3-us-west-2.amazonaws.com/curriculum-content/web-development/algorithms/homerphonebook.gif)
 
   > Phone books were how people found numbers of businesses before the Internet.  Look how much fun Homer is having in comparison to the guy behind him.  
 
 If you were to look for a name in a phone book, you might flip to the center, see if your guess were to high or low, and guess again until you could answer your question.  You would not flip the pages one by one.  Our previous function, would still work, but would essentially be flipping our pages one by one.  If you were considering whether a letter were in a string, you reduce the size of your string each time you take a guess.
 
-![](https://www.mkwd.net/wp-content/uploads/2016/05/binary_search.png)
+![](https://s3-us-west-2.amazonaws.com/curriculum-content/web-development/algorithms/binary_search.png)
 > Binary search divides the dataset with each attempt to find a match.
 
 Let's look at our old technique and our new technique side by side.  Also, let's name our new function binarySearch.  
@@ -150,7 +150,7 @@ So at this point, it's pretty meaningless to add 3 to our cost for those first t
 
 Now, when we consider time complexity, we never care about how much we need to add or multiply by.  Rather the only number we care about is the leading exponent of our formula.  You may remember this from our Google Search a few lessons ago.
 
-![](./time-complexity.png)
+![](https://s3-us-west-2.amazonaws.com/curriculum-content/web-development/algorithms/time-complexity.png)
 
 So we can now begin to understand that second sentence, "excludes coefficients and lower order terms."  Co-efficients just means anything that we multiply n by, and exclude lower order terms means that we should only consider the "term" with the highest exponent.  For example, let's say the the time complexity of our function is 5n^3 + n^2 + 100n + log2(n) + 100.  Here n^3, n^2, 100n, log2(n) and 100 are all "terms" of the function.  Excluding the lower order terms we would say that the time complexity of our function is 5n^3, and excluding n^3's co-efficient of 5 we would that the time complexity is  n^3.  
 
@@ -175,7 +175,7 @@ So in summary, when considering asymptoptic time complexity, we only look to the
 
 We call this big O.
 
-![](./time-complexity.png)
+![](https://s3-us-west-2.amazonaws.com/curriculum-content/web-development/algorithms/time-complexity.png)
 
 ### It gets better
 
