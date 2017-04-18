@@ -127,18 +127,18 @@ Ok, so we already concluded the cost of our first function was n + 3 where n is 
     
 Well, there are a couple of calculations involved in reaching a precise number, but let's focus on what is the biggest determinant: how many times we travel through the while loop above.  Because the function cuts what we search through in half every time we pass through the loop, we can make the following chart:
 
-	| Input size (n) | Number of guesses |
-	| ------------- |-------------|
-	| 1 | 0 |
-	| 2 | 1 |
-	| 4 | 2 |
-	| 8 | 3 |
-	| 16 | 4 |
-	| 1024 | 10 |
-	| 2048 | 11 |
-	| 4096 | 12 |
-	| 1,048,576 | 20 |   
-	| n | log2(n) |
+| Input size (n) | Number of guesses |
+| ------------- |-------------|
+| 1 | 0 |
+| 2 | 1 |
+| 4 | 2 |
+| 8 | 3 |
+| 16 | 4 |
+| 1024 | 10 |
+| 2048 | 11 |
+| 4096 | 12 |
+| 1,048,576 | 20 |   
+| n | log2(n) |
 
 Ok, so as you see above, as our input size increases, the number of guesses involved increases, but very slowly.   We can answer the question of whether a letter is in a sorted string over one million characters long in only twenty guesses. 
 
