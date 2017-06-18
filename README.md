@@ -12,7 +12,7 @@ Ok, so in our last discussion of time complexity, we said that we consider the w
 
 Sometimes, time complexity is called **asymptotic time complexity**.  
 
-Asymptotic means: 
+Asymptotic means:
 
 * as n (ie. the length of our input) approaches infinity.  
 
@@ -26,17 +26,17 @@ In the last section, we answered whether a random string included a letter by co
 let string = "banana"
 let letter = "a"
 
-  function stringIncludes(string, letter){
-    let matches;
-    for(let i = 0; i < string.length; i++){
-      if(string[i] === letter){
-        matches = true
-      }
+function stringIncludes(string, letter){
+  let matches;
+  for(let i = 0; i < string.length; i++){
+    if(string[i] === letter){
+      matches = true
     }
-    return !!matches
   }
+  return !!matches
+}
 
-  stringIncludes(string, letter)
+stringIncludes(string, letter)
 ```
 
 Now, let's assume that we are able to sort our letters in alphabetical order.  We'll discuss the cost of sorting in a later section, but for now let's assume the we can sort for free, magically, by calling the following function:
@@ -118,13 +118,13 @@ Let's look at our old technique and our new technique side by side.  Also, let's
 Now these two different functions are vastly different in how performant they are.  Let's go through our steps for calculating time complexity.
 
   1. *Consider the worse case scenario in both functions*
-  
-The worst case scenario is the same for each function.  The worst case would be where we have to keep guessing until we can conclude that the letter is not in our string. 
-     
+
+The worst case scenario is the same for each function.  The worst case would be where we have to keep guessing until we can conclude that the letter is not in our string.
+
   2. *Calculate the cost as a the size of our input varies*
 
 Ok, so we already concluded the cost of our first function was n + 3 where n is the size of our input string.  What is the cost of our new binarySearch function?
-    
+
 Well, there are a couple of calculations involved in reaching a precise number, but let's focus on what is the biggest determinant: how many times we travel through the while loop above.  Because the function cuts what we search through in half every time we pass through the loop, we can make the following chart:
 
 | Input size (n) | Number of guesses |
@@ -140,7 +140,7 @@ Well, there are a couple of calculations involved in reaching a precise number, 
 | 1,048,576 | 20 |   
 | n | log2(n) |
 
-Ok, so as you see above, as our input size increases, the number of guesses involved increases, but very slowly.   We can answer the question of whether a letter is in a sorted string over one million characters long in only twenty guesses. 
+Ok, so as you see above, as our input size increases, the number of guesses involved increases, but very slowly.   We can answer the question of whether a letter is in a sorted string over one million characters long in only twenty guesses.
 
 Just as we could express the time complexity of our original method in terms of the size of the input string (n), we can do so with binary search as well.  The time complexity of our binary search function is log2n (log base 2 of n).  Log base 2 of n just means, given a number, how many times would you have to press divided by two on a calculator to get down to 1.  Notice that when the size gets really large, like over a million it still only takes us 20 guesses.  Our other formula would cost us the size of n, or over a million.  
 
@@ -166,7 +166,7 @@ Now consider the following:
 
 You can see that in our formula of **n^3 + n^2 + n + 100**, when n is 1000, the formula returns 1,001,001,110.
 
-Moreover, you can see that compared to n^3, the n^2 doesn't move the dial.  It accounts for just 1,000th of our overall cost.  And this is still when our n is relatively small.  Imagine when our input size increases to ten thousand.  So we see that the leading exponent is dominant when calculating the cost of our function. 
+Moreover, you can see that compared to n^3, the n^2 doesn't move the dial.  It accounts for just 1,000th of our overall cost.  And this is still when our n is relatively small.  Imagine when our input size increases to ten thousand.  So we see that the leading exponent is dominant when calculating the cost of our function.
 
 Now if we can exclude something like n^2 when n approaches infinity, we can also exclude anything that we multiply n by.  It just doesn't make the type of impact that we care about.  We care about things that change our formula by a factor of n when **n approaches infinity**.  So compared to that, any number you multiply our formula by will be insignificant.    
 
