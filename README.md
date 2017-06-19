@@ -14,7 +14,7 @@ Sometimes, time complexity is called **asymptotic time complexity**.
 
 Asymptotic means:
 
-* as n (ie. the length of our input) approaches infinity.  
+* as n (i.e. the length of our input) approaches infinity.  
 
 That is how we really calculate the cost of our function, by asking what is the worst case scenario when our input gets really large.  What is the cost in terms of the size of that input.  
 
@@ -26,14 +26,13 @@ In the last section, we answered whether a random string included a letter by co
 let string = "banana"
 let letter = "a"
 
-function stringIncludes(string, letter){
-  let matches;
-  for(let i = 0; i < string.length; i++){
-    if(string[i] === letter){
-      matches = true
+function stringIncludes(string, letter) {
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === letter) {
+      return true
     }
   }
-  return !!matches
+  return false
 }
 
 stringIncludes(string, letter)
@@ -42,7 +41,7 @@ stringIncludes(string, letter)
 Now, let's assume that we are able to sort our letters in alphabetical order.  We'll discuss the cost of sorting in a later section, but for now let's assume the we can sort for free, magically, by calling the following function:
 
 ```javascript
-  function sortString(string){
+  function sortString(string) {
     return string.split('').sort().join('')
   }
   sortString("banana")
@@ -56,16 +55,16 @@ Now, let's assume that we are able to sort our letters in alphabetical order.  W
 
 Now, if I gave you the choice between answering two questions: if the letter "u" was included in the string "itwasthebestoftimesitwastheworseoftimes" or was in that same string, but now sorted as "aabeeeeeeffhhiiiimmooorsssssstttttttwww", which would be faster for you?  
 
-Probably the second right?  In answering the question, you would no longer visit each letter of the string one by one, but instead would look to the middle, see that the middle letter is "i", move further down past the t section, and at w we know that it is not there.  I call our procedure the phone book method.
+Probably the second, right?  In answering the question, you would no longer visit each letter of the string one by one, but instead would look to the middle, see that the middle letter is "i", move further down past the "t" section, and at "w" would know that it is not there.  I call our procedure the phone book method.
 
 ![](https://s3-us-west-2.amazonaws.com/curriculum-content/web-development/algorithms/homerphonebook.gif)
 
   > Phone books were how people found numbers of businesses before the Internet.  Look how much fun Homer is having in comparison to the guy behind him.  
 
-If you were to look for a name in a phone book, you might flip to the center, see if your guess were to high or low, and guess again until you could answer your question.  You would not flip the pages one by one.  Our previous function, would still work, but would essentially be flipping our pages one by one.  If you were considering whether a letter were in a string, you reduce the size of your string each time you take a guess.
+If you were to look for a name in a phone book, you might flip to the center, see if your guess was too high or low, and guess again until you could answer your question.  You would not flip the pages one by one.  While our previous function would still work, it would essentially be flipping our pages one by one.  If you were considering whether a letter were in a string, you would reduce the size of your string each time you take a guess.
 
 ![](https://s3-us-west-2.amazonaws.com/curriculum-content/web-development/algorithms/binary_search.png)
-> Binary search divides the dataset with each attempt to find a match.
+> Binary search divides the dataset with each iteration until it either finds a match or confirms none exists.
 
 Let's look at our old technique and our new technique side by side.  Also, let's name our new function binarySearch.  
 
@@ -74,44 +73,40 @@ Let's look at our old technique and our new technique side by side.  Also, let's
 ```javascript
 
 // one by one
-  function stringIncludes(string, letter){
-    let matches;
-    for(let i = 0; i < string.length; i++){
-      if(string[i] === letter){
-        matches = true
-      }
-    }
-    return !!matches
-  }
-
-  function binarySearch(string, letter) {
-    var startpoint = 0
-    var endpoint = string.length - 1;
-    var guessPosition = parseInt((endpoint - startpoint)/2)
-    while (startpoint != endpoint) {
-      console.log(`start point is ${startpoint}, endpoint is ${endpoint} and guessposition is ${guessPosition}`)
-        if (string[guessPosition] < letter) {
-          console.log('too low')
-            startpoint = guessPosition
-            guessPosition = startpoint + Math.round((endpoint - startpoint)/2)
-        } else if(string[guessPosition] > letter) {
-          console.log('too high')
-            endpoint = guessPosition
-            guessPosition = startpoint + parseInt((endpoint - startpoint)/2)
-        } else {
-          console.log('just right')
-            return true;
-        }
-    }
-    if(string === letter){
+function stringIncludes(string, letter) {
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === letter) {
       return true
-    } else{
-      console.log('sorry')
-      return false;
     }
   }
+  return false
+}
 
-  let string = "aabeeeeeeffhhiiiimmooorsssssstttttttwww"
+function binarySearch(string, letter) {
+  if (string === letter) return true // common one liner-syntax to handle an algorithm's 'corner cases' at the start
+  var startPoint = 0
+  var endPoint = string.length - 1
+  var guessPosition = Math.floor(endPoint/2)
+  while (startPoint != endPoint) {
+    console.log(`start point is ${startPoint}, endPoint is ${endPoint} and guessPosition is ${guessPosition}`)
+    if (string[guessPosition] < letter) {
+      console.log('too low')
+      startPoint = guessPosition
+      guessPosition = startPoint + Math.floor((endPoint - startPoint)/2)
+    } else if (string[guessPosition] > letter) {
+      console.log('too high')
+      endPoint = guessPosition
+      guessPosition = startPoint + Math.floor((endPoint - startPoint)/2)
+    } else {
+      console.log('just right')
+      return true
+    }
+  }
+  console.log('sorry')
+  return false // if our conditional 'else' above was never encountered then our value is not present in the collection!
+}
+
+let string = "aabeeeeeeffhhiiiimmooorsssssstttttttwww"
 
 ```
 
@@ -142,7 +137,7 @@ Well, there are a couple of calculations involved in reaching a precise number, 
 
 Ok, so as you see above, as our input size increases, the number of guesses involved increases, but very slowly.   We can answer the question of whether a letter is in a sorted string over one million characters long in only twenty guesses.
 
-Just as we could express the time complexity of our original method in terms of the size of the input string (n), we can do so with binary search as well.  The time complexity of our binary search function is log2n (log base 2 of n).  Log base 2 of n just means, given a number, how many times would you have to press divided by two on a calculator to get down to 1.  Notice that when the size gets really large, like over a million it still only takes us 20 guesses.  Our other formula would cost us the size of n, or over a million.  
+Just as we could express the time complexity of our original method in terms of the size of the input string (n), we can do so with binary search as well.  The time complexity of our binary search function is log2n (log base 2 of n).  Log base 2 of n just means, given a number, how many times would you have to press divided by two on a calculator to get down to 1.  Notice that when the size gets really large, even over a million, it still only takes us 20 guesses.  Our other formula would cost us the size of n, or over a million.  
 
 ### Simplifying Time Complexity
 
@@ -166,11 +161,11 @@ Now consider the following:
 
 You can see that in our formula of **n^3 + n^2 + n + 100**, when n is 1000, the formula returns 1,001,001,110.
 
-Moreover, you can see that compared to n^3, the n^2 doesn't move the dial.  It accounts for just 1,000th of our overall cost.  And this is still when our n is relatively small.  Imagine when our input size increases to ten thousand.  So we see that the leading exponent is dominant when calculating the cost of our function.
+Moreover, you can see that compared to n^3, the n^2 doesn't move the dial.  It accounts for just 1,000th of our overall cost.  And this is still when our n is relatively small.  Imagine when our input size increases to ten thousand.  Here we see that the leading exponent is dominant when calculating the cost of our function.
 
-Now if we can exclude something like n^2 when n approaches infinity, we can also exclude anything that we multiply n by.  It just doesn't make the type of impact that we care about.  We care about things that change our formula by a factor of n when **n approaches infinity**.  So compared to that, any number you multiply our formula by will be insignificant.    
+Now, if we can exclude something like n^2 when n approaches infinity, we can also exclude anything that we multiply n by.  It just doesn't make the type of impact that we care about.  We care about things that change our formula by a factor of n when **n approaches infinity**.  So compared to that, any number you multiply our formula by will be insignificant.    
 
-So in summary, when considering asymptoptic time complexity, we only look to the term with the largest exponent, we only consider the worse case scenario, and we ignore co-efficients as well as any smaller terms.  
+In summary, when considering asymptotic time complexity we: only look to the term with the largest exponent; only consider the worse case scenario; and ignore coefficients as well as any smaller terms.
 
 We call this big O.
 
@@ -183,10 +178,10 @@ Ok, so now we have learned that when expressing the cost of an algorithm, we onl
 Let's look at a couple of equations:
 
 ```javascript
-function nSquared(string, letter){
-  let matches;
-  for(let i = 0; i < string.length; i++){ // loop 1
-    for(let i = 0; i < string.length; i++){ // loop 2
+function nSquared(string, letter) {
+  let matches
+  for (let i = 0; i < string.length; i++) { // loop 1
+    for (let i = 0; i < string.length; i++) { // loop 2
       ...
     }
   }
@@ -196,16 +191,16 @@ function nSquared(string, letter){
 nSquared("abc")
 ```
 
-The big O of the above function is n squared.  The reason why is because loop 2 has a cost of three (if we pass through "abc").  And then how many times does loop 1 run through innermost loop 2?  Well three times.  So we incur a cost of three, three times leading to a total cost is nine.  So moving to a string of length n, we go through the body of loop one n times, and the cost of that is loop 2 which equals n.  So total cost is n^2.
+The big O of the above function is n squared.  The reason why is because loop 2 has a cost of three (if we pass through "abc").  And then how many times does loop 1 run through innermost loop 2?  Well, three times.  So we incur a cost of three, (three times), leading to a total cost of nine.  Moving to a string of length n, we go through the body of loop one n times, and the cost of each time is loop 2 (which is also n).  Now our total cost is n^2.
 
 Now let's look at n^3.  
 
 ```javascript
-function nCubed(string, letter){
-  let matches;
-  for(let i = 0; i < string.length; i++){ // loop 1
-    for(let i = 0; i < string.length; i++){ // loop 2
-        for(let i = 0; i < string.length; i++){ // loop 3
+function nCubed(string, letter) {
+  let matches
+  for (let i = 0; i < string.length; i++) { // loop 1
+    for (let i = 0; i < string.length; i++) { // loop 2
+        for (let i = 0; i < string.length; i++) { // loop 3
           ...
         }
     }
@@ -221,15 +216,15 @@ Here's the point: to calculate the big O of a function if each loop forces you t
 Here is one gotcha.  The big O of the below function is not n^2.  It's just n. Do you see why?
 
 ```javascript
-function notNSquared(string, letter){
-  let matches;
-  for(let i = 0; i < string.length; i++){
-    if(string[i] === letter){
+function notNSquared(string, letter) {
+  let matches
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === letter) {
       matches = true
     }
   }
-  for(let i = 0; i < string.length; i++){
-    if(string[i] === letter){
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === letter) {
       matches = true
     }
   }
