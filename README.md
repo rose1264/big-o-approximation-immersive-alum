@@ -165,7 +165,7 @@ Moreover, you can see that compared to n^3, the n^2 doesn't move the dial.  It a
 
 Now, if we can exclude something like n^2 when n approaches infinity, we can also exclude anything that we multiply n by.  It just doesn't make the type of impact that we care about.  We care about things that change our formula by a factor of n when **n approaches infinity**.  So compared to that, any number you multiply our formula by will be insignificant.    
 
-In summary, when considering asymptotic time complexity we: only look to the term with the largest exponent; only consider the worse case scenario; and ignore coefficients as well as any smaller terms.
+In summary, when considering asymptotic time complexity, we: only look to the term with the largest exponent; only consider the worse case scenario; and ignore coefficients as well as any smaller terms.
 
 We call this big O.
 
