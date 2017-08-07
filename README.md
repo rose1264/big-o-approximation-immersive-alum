@@ -39,7 +39,7 @@ let letter = "a"
   stringIncludes(string, letter)
 ```
 
-Now, let's assume that we are able to sort our letters in alphabetical order.  We'll discuss the cost of sorting in a later section, but for now let's assume the we can sort for free, magically, by calling the following function:
+Now, let's assume that we are able to sort our letters in alphabetical order.  We'll discuss the cost of sorting in a later section, but for now let's assume that we can sort for free, magically, by calling the following function:
 
 ```javascript
   function sortString(string){
@@ -241,3 +241,5 @@ So in the function above, we don't go through a loop n times, we only go through
 ## Summary
 
 In this section we saw that when the input size is large (meaning over ten thousand or so), the leading exponent dominates our calculation of the cost of an algorithm, and so we can ignore considerations like smaller exponents, multipliers of an exponent and any number we need to add by.  Then we saw that we can calculate the big O of a function by generally counting the number of nested loops that ask us to traverse through each number.  
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/big-o-approximation'>Big O Approximation</a> on Learn.co and start learning to code for free.</p>
