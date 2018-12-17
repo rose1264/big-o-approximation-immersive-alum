@@ -154,7 +154,7 @@ Now, when we consider time complexity, we never care about how much we need to a
 
 So we can now begin to understand that second sentence, "excludes coefficients and lower order terms."  Coefficients just mean anything that we multiply n by, and exclude lower order terms means that we should only consider the "term" with the highest exponent.  For example, let's say the the time complexity of our function is 5n^3 + n^2 + 100n + log2(n) + 100.  Here n^3, n^2, 100n, log2(n) and 100 are all "terms" of the function.  Excluding the lower order terms we would say that the time complexity of our function is 5n^3, and excluding n^3's co-efficient of 5 we would that the time complexity is  n^3.  
 
-Ok, so the Internet told us to exclude co-efficients and lower order terms, but can we really just get get away with that?
+Ok, so the Internet told us to exclude co-efficients and lower order terms, but can we really just get away with that?
 
 Well let's assume the time complexity of our function and is **n^3 + n^2 + n + 100** and assume that **n is 1,000**.  
 
